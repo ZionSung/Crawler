@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 import os
-
+from PIL import Image
 # Interface
 import tkinter as tk
 
