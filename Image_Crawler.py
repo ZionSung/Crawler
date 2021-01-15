@@ -25,6 +25,16 @@ def get_image():
         with open("images/" + input_image + str(i+1) + ".jpg", "wb") as file:  # 開啟資料夾及命名圖片檔
             file.write(img.content)  # 寫入圖片的二進位碼
 
+        im = Image.open("images/" + input_image + str(i+1) + ".jpg")
+        print(im.size)
+        if im.size[0] >= 1000 and im.size[1] >= 1000 :
+            if not os.path.exists("images/high_images"):
+                os.mkdir("images/high_images")
+            im.save("images/high_images/" + input_image + str(i+1) + ".jpg")
+        else:
+            if not os.path.exists("images/low_images"):
+                os.mkdir("images/low_images")
+            im.save("images/low_images/" + input_image + str(i+1) + ".jpg") 
         feedback_label.configure(text='Finish! Images had in the images folder.')
 
 
