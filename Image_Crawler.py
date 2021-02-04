@@ -15,14 +15,14 @@ def get_image():
     input_image = image_entry.get()
     response = requests.get(f"https://unsplash.com/s/photos/{input_image}")
     soup = BeautifulSoup(response.text, "lxml")
-    results = soup.find_all("img", {"class": "_2UpQX"}, limit=3)
-    image_links = [result.get("src") for result in results]  # 取得圖片來源連結
+    results = soup.find_all("img", {"class": "_2UpQX"}, limit=8)
+    image_links = [result.get("src") for result in results] 
     for i, link in enumerate(image_links):
         if not os.path.exists("images"):
-            os.mkdir("images")  # 建立資料夾
+            os.mkdir("images") 
  
-        img = requests.get(link)  # 下載圖片
-        with open("images/" + input_image + str(i+1) + ".jpg", "wb") as file:  # 開啟資料夾及命名圖片檔
+        img = requests.get(link) 
+        with open("images/" + input_image + str(i+1) + ".jpg", "wb") as file:
             file.write(img.content)  # 寫入圖片的二進位碼
 
         im = Image.open("images/" + input_image + str(i+1) + ".jpg")
